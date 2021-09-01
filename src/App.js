@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import FichaMedicaProvider from "./providers/FichaMedica";
+
+import List from "./components/list";
+import New from "./components/new";
+import Edit from "./components/edit";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <FichaMedicaProvider>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <Link to={"/"} className="navbar-brand">
+            Registros Médicos
+          </Link>
+        </div>
+      </nav>
+      <div className="py-4">
+        <Switch>
+          <Route exact path={["/", "/list"]} component={List} />
+          <Route exact path="/new" component={New} />
+          <Route path="/edit/:id" component={Edit} />
+        </Switch>
+      </div>
+    </FichaMedicaProvider>
   );
 }
 
