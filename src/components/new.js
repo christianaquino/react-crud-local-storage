@@ -24,7 +24,7 @@ const schema = yup.object().shape({
   telefono: yup
     .string()
     .required("El campo teléfono es obligatorio")
-    .matches(/[0-9]/, "El campo teléfono debe contener sólo múmeros")
+    .matches(/^[0-9]+$/, "El campo teléfono debe contener sólo múmeros")
     .length(9, "El campo teléfono debe tener 9 caracteres"),
   email: yup
     .string()
@@ -43,7 +43,7 @@ function New() {
   const [fichaMedicaList, setFichaMedicaList] = useContext(FichaMedicaContext);
 
   const fields = [
-    { name: "rut", label: "Rut", placeHolder: "Ej: 7416161-8" },
+    { name: "rut", label: "Rut", placeHolder: "Ej: 7.416.161-8" },
     { name: "nombres", label: "Nombres" },
     { name: "apellidos", label: "Apellidos" },
     { name: "direccion", label: "Direccion" },
