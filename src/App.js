@@ -10,8 +10,8 @@ import Edit from "./components/edit";
 function App() {
   return (
     <FichaMedicaProvider>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+      <nav className="navbar navbar-dark bg-primary bg-gradient">
+        <div className="container-fluid">
           <Link to={"/"} className="navbar-brand">
             Registros Médicos
           </Link>

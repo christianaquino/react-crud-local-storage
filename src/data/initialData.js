@@ -31,7 +31,7 @@ const initialData = [
     ciudad: "Santiago",
     telefono: "951343783",
     email: "ftorres@yopmail.com",
-    fechaNacimiento: "21/09/1998",
+    fechaNacimiento: "18/02/1997",
     estadoCivil: "Solero/a",
     comentarios: "",
   },

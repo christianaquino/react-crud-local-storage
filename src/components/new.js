@@ -123,7 +123,7 @@ function New() {
                 Comentarios
               </label>
               <textarea
-                {...register("estadoCivil")}
+                {...register("comentarios")}
                 className="form-control form-control-sm"
               ></textarea>
             </div>

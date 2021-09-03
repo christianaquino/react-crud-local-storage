@@ -1,14 +1,56 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { FichaMedicaContext } from "../providers/FichaMedica";
 
 function List() {
   const [fichaMedicaList] = useContext(FichaMedicaContext);
+  const [records, setRecords] = useState(fichaMedicaList);
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    setRecords(
+      fichaMedicaList.filter((record) =>
+        record.apellidos.toLowerCase().includes(data.searchText.toLowerCase())
+      )
+    );
+  };
+
+  const clearFilter = () => {
+    setRecords(fichaMedicaList);
+  };
+
   return (
     <div className="container-fluid">
-      <table class="table">
+      <form
+        className="row row-cols-lg-auto g-2 align-items-center pb-2"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="col-12">
+          <input
+            className="form-control"
+            {...register("searchText")}
+            placeholder="Buscar por apellido"
+          />
+        </div>
+        <div className="col-12">
+          <button className="btn btn-success">Buscar Registro</button>
+        </div>
+        <div className="col-12">
+          <button
+            className="btn btn-secondary"
+            type="reset"
+            onClick={clearFilter}
+          >
+            Limpiar Filtro
+          </button>
+        </div>
+      </form>
+
+      <table className="table table-bordered">
         <thead>
-          <tr>
+          <tr className="table-light">
             <th scope="col">Rut</th>
             <th scope="col">Nombres</th>
             <th scope="col">Apellidos</th>
@@ -22,7 +64,7 @@ function List() {
           </tr>
         </thead>
         <tbody>
-          {fichaMedicaList.map((registro) => (
+          {records.map((registro) => (
             <tr>
               <td>{registro.rut}</td>
               <td>{registro.nombres}</td>
