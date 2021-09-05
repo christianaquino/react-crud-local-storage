@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Modal, Button } from "react-bootstrap";
 
 import { FichaMedicaContext } from "../providers/FichaMedica";
 
@@ -43,6 +44,56 @@ const schema = yup.object().shape({
 function New() {
   const [fichaMedicaList, setFichaMedicaList] = useContext(FichaMedicaContext);
 
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showExistingModal, setShowExistingModal] = useState(false);
+  const [editRecordId, setEditRecordId] = useState(null);
+
+  const handleCloseSuccessModal = () => setShowSuccessModal(false);
+  const handleCloseExistingModal = () => setShowExistingModal(false);
+
+  const successModal = () => (
+    <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Nuevo Registro</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>El nuevo registro se ha creado exitosamente.</Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={handleCloseSuccessModal}>
+          Aceptar
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
+  const existingModal = () => (
+    <Modal show={showExistingModal} onHide={handleCloseExistingModal} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Registro Existente</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="pb-2">
+          El RUT ingresado corresponde a un registro existente.
+        </div>
+        <ul>
+          <li>
+            Seleccione la opción "Si" para reemplazarlo por un nuevo registro
+            con los valores ingresados.
+          </li>
+          <li>Seleccione la opción "No" para mantener los valores actuales.</li>
+        </ul>
+        <div>¿Desea reemplazarlo por un nuevo registro?</div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleReplaceRecord}>
+          Si
+        </Button>
+        <Button variant="primary" onClick={handleCloseExistingModal}>
+          No
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
   const fields = [
     { name: "rut", label: "Rut (*)", placeHolder: "Ej: 7.416.161-8" },
     { name: "nombres", label: "Nombres (*)" },
@@ -62,14 +113,45 @@ function New() {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
     reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
+    const found = fichaMedicaList.find((record, index) => {
+      const checkRut = record.rut === data.rut;
+      if (checkRut) {
+        setEditRecordId(index);
+      }
+      return checkRut;
+    });
+
+    if (found) {
+      setShowExistingModal(true);
+    } else {
+      saveNewRecord(data);
+    }
+  };
+
+  const saveNewRecord = (data) => {
     setFichaMedicaList([...fichaMedicaList, { ...data }]);
+    setShowSuccessModal(true);
     reset();
+  };
+
+  const replaceRecord = (data) => {
+    const newFicahaMedicaList = [...fichaMedicaList];
+    newFicahaMedicaList[editRecordId] = data;
+    setFichaMedicaList([...newFicahaMedicaList]);
+    setShowSuccessModal(true);
+    reset();
+  };
+
+  const handleReplaceRecord = () => {
+    replaceRecord(getValues());
+    handleCloseExistingModal();
   };
 
   return (
@@ -141,6 +223,8 @@ function New() {
           </form>
         </div>
       </div>
+      {successModal()}
+      {existingModal()}
     </div>
   );
 }
