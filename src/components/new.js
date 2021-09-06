@@ -218,7 +218,7 @@ function New() {
               Limpiar
             </button>
             <Link to={"/"} className="btn btn-danger">
-              Cancelar
+              Cerrar
             </Link>
           </form>
         </div>
