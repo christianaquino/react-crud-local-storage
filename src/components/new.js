@@ -15,11 +15,11 @@ const schema = yup.object().shape({
   nombres: yup
     .string()
     .required("El campo nombres es obligatorio")
-    .matches(/^[a-zA-Z ]+$/, "El campo nombres debe contener sólo letras"),
+    .matches(/^[a-zA-Z]+$/, "El campo nombres debe contener sólo letras"),
   apellidos: yup
     .string()
     .required("El campo apellidos es obligatorio")
-    .matches(/^[a-zA-Z ]+$/, "El campo apellidos debe contener sólo letras"),
+    .matches(/^[a-zA-Z]+$/, "El campo apellidos debe contener sólo letras"),
   direccion: yup.string().required("El campo dirección es obligatorio"),
   ciudad: yup.string().required("El campo ciudad es obligatorio"),
   telefono: yup
@@ -36,7 +36,7 @@ const schema = yup.object().shape({
     .required("El campo fecha de nacimiento es obligatorio")
     .matches(
       /^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})/g,
-      "Ingrese una feha válida"
+      "Ingrese una fecha válida"
     ),
   estadoCivil: yup.string().required("Debe seleccionar una opción"),
 });
