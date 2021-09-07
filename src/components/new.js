@@ -98,9 +98,9 @@ function New() {
     { name: "rut", label: "Rut (*)", placeHolder: "Ej: 7.416.161-8" },
     { name: "nombres", label: "Nombres (*)" },
     { name: "apellidos", label: "Apellidos (*)" },
-    { name: "direccion", label: "Direccion (*)" },
+    { name: "direccion", label: "Dirección (*)" },
     { name: "ciudad", label: "Ciudad (*)" },
-    { name: "telefono", label: "Telefono (*)", placeHolder: "Ej: 971762643" },
+    { name: "telefono", label: "Teléfono (*)", placeHolder: "Ej: 971762643" },
     { name: "email", label: "Email (*)" },
     {
       name: "fechaNacimiento",
