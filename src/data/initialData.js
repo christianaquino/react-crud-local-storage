@@ -20,7 +20,7 @@ const initialData = [
     telefono: "986342552",
     email: "juanperez@mail.com",
     fechaNacimiento: "21/09/1988",
-    estadoCivil: "Solero/a",
+    estadoCivil: "Soltero/a",
     comentarios: "",
   },
   {
@@ -32,7 +32,7 @@ const initialData = [
     telefono: "951343783",
     email: "ftorres@yopmail.com",
     fechaNacimiento: "18/02/1997",
-    estadoCivil: "Solero/a",
+    estadoCivil: "Soltero/a",
     comentarios: "",
   },
 ];

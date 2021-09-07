@@ -54,9 +54,9 @@ function List() {
             <th scope="col">Rut</th>
             <th scope="col">Nombres</th>
             <th scope="col">Apellidos</th>
-            <th scope="col">Direccion</th>
+            <th scope="col">Dirección</th>
             <th scope="col">Ciudad</th>
-            <th scope="col">Telefono</th>
+            <th scope="col">Teléfono</th>
             <th scope="col">Email</th>
             <th scope="col">Fecha Nac</th>
             <th scope="col">Estado Civil</th>
